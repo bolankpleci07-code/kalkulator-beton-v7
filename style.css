@@ -1,41 +1,172 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f1f5f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-h1 {
-    text-align: center;
-    color: #14532d;
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 900px;
+}
+
+.header {
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 24px;
+}
+
+.version-badge {
+    background-color: #10b981;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Layout Grid Dua Kolom */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
 h3 {
-    color: #166534;
+    color: #374151;
+    font-size: 16px;
+    margin: 0 0 15px 0;
+    font-weight: 600;
 }
 
-input {
+.input-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+input, select {
     width: 100%;
-    padding: 12px;
-    margin: 7px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: #1f2937;
+    background-color: #f9fafb;
+    transition: all 0.2s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #2563eb;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 button {
-    width: 100%;
-    padding: 14px;
-    background: #15803d;
+    flex: 2;
+    padding: 12px;
+    background-color: #2563eb;
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
-    margin-top: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-#hasil {
-    background: white;
-    padding: 15px;
-    margin-top: 20px;
+button:hover {
+    background-color: #1d4ed8;
+}
+
+button.btn-reset {
+    flex: 1;
+    background-color: #e5e7eb;
+    color: #4b5563;
+}
+
+button.btn-reset:hover {
+    background-color: #d1d5db;
+}
+
+/* Kolom Hasil Ringkasan / KPI Cards */
+.result-column {
+    background-color: #f9fafb;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.kpi-card {
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
     border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kpi-card.main-volume {
+    background-color: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+.kpi-label {
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.kpi-card.main-volume .kpi-label {
+    color: #1e40af;
+}
+
+.kpi-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.kpi-card.main-volume .kpi-value {
+    font-size: 24px;
+    color: #1d4ed8;
 }
