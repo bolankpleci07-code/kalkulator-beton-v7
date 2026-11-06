@@ -2,48 +2,294 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <title>Cut and Fill Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Beton V7.0 - Pro Edition</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 900px;
+        }
+        .header {
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h2 {
+            margin: 0;
+            color: #111827;
+            font-size: 24px;
+        }
+        .version-badge {
+            background-color: #10b981;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        /* Layout Grid Dua Kolom */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 768px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        h3 {
+            color: #374151;
+            font-size: 16px;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+        .input-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #4b5563;
+            font-size: 14px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+            color: #1f2937;
+            background-color: #f9fafb;
+            transition: all 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2563eb;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 2;
+            padding: 12px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        button.btn-reset {
+            flex: 1;
+            background-color: #e5e7eb;
+            color: #4b5563;
+        }
+        button.btn-reset:hover {
+            background-color: #d1d5db;
+        }
+        /* Kolom Hasil Ringkasan / KPI Cards */
+        .result-column {
+            background-color: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+        .kpi-card {
+            background-color: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .kpi-card.main-volume {
+            background-color: #eff6ff;
+            border-color: #bfdbfe;
+        }
+        .kpi-label {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        .kpi-card.main-volume .kpi-label {
+            color: #1e40af;
+        }
+        .kpi-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+        }
+        .kpi-card.main-volume .kpi-value {
+            font-size: 24px;
+            color: #1d4ed8;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Cut and Fill Calculator</h1>
 
-    <h3>Data Proyek</h3>
+<div class="container">
+    <div class="header">
+        <h2>Kalkulator Beton</h2>
+        <span class="version-badge">Version 7.0 Pro</span>
+    </div>
+    
+    <div class="main-layout">
+        <!-- KOLOM KIRI: INPUT FORM -->
+        <div class="input-column">
+            <h3>Input Parameter & Ukuran</h3>
+            
+            <div class="input-group">
+                <label for="jenisBeton">Jenis / Mutu Beton</label>
+                <select id="jenisBeton">
+                    <option value="K-225">K-225 (Standar Rumah Tinggal/Dak)</option>
+                    <option value="K-175">K-175 (Lantai Kerja)</option>
+                    <option value="K-250">K-250 (Ruko / Lantai 2)</option>
+                </select>
+            </div>
 
-    <input id="namaProyek"
-           placeholder="Nama proyek">
+            <div class="input-group">
+                <label for="kemasanSemen">Ukuran Kemasan Semen</label>
+                <select id="kemasanSemen">
+                    <option value="50">Semen Per Sak 50 Kg</option>
+                    <option value="40">Semen Per Sak 40 Kg</option>
+                </select>
+            </div>
 
-    <h3>Data Pengukuran</h3>
+            <div class="input-group">
+                <label for="bentukBeton">Bentuk Konstruksi</label>
+                <select id="bentukBeton" onchange="sesuaikanFormulir()">
+                    <option value="balok">Balok / Plat Lantai</option>
+                    <option value="silinder">Silinder (Kolom Bulat)</option>
+                </select>
+            </div>
 
-    <input id="panjang"
-           type="number"
-           placeholder="Panjang grid (m)">
+            <div class="input-group">
+                <label for="panjang">Panjang (meter)</label>
+                <input type="number" id="panjang" step="any" placeholder="Masukkan panjang bangunan">
+            </div>
 
-    <input id="lebar"
-           type="number"
-           placeholder="Lebar grid (m)">
+            <div class="input-group">
+                <label id="labelLebar" for="lebar">Lebar (meter)</label>
+                <input type="number" id="lebar" step="any" placeholder="Masukkan lebar bangunan">
+            </div>
 
-    <h3>Elevasi Tanah</h3>
+            <div class="input-group">
+                <label for="tinggi">Tinggi / Tebal (meter)</label>
+                <input type="number" id="tinggi" step="any" placeholder="Contoh tebal dak: 0.12 atau 0.15">
+            </div>
 
-    <input id="existing"
-           type="number"
-           step="any"
-           placeholder="Elevasi tanah asli">
+            <div class="btn-container">
+                <button type="button" class="btn-reset" onclick="resetForm()">Reset</button>
+                <button type="button" onclick="hitungvolume()">HITUNG SEKARANG</button>
+            </div>
+        </div>
 
-    <input id="design"
-           type="number"
-           step="any"
-           placeholder="Elevasi rencana">
+        <!-- KOLOM KANAN: LIVE HASIL & ANALISIS MATERIAL -->
+        <div class="result-column">
+            <h3>Rincian Kebutuhan Material (SNI)</h3>
+            
+            <!-- Hasil Volume Utama -->
+            <div class="kpi-card main-volume">
+                <div class="kpi-label">Total Volume Beton</div>
+                <div class="kpi-value" id="hasilVolume">0.000 m³</div>
+            </div>
 
-    <button onclick="hitung()">
-        Hitung Cut and Fill
-    </button>
+            <!-- Kebutuhan Semen -->
+            <div class="kpi-card">
+                <div class="kpi-label">Kebutuhan Semen Belanja</div>
+                <div class="kpi-value" id="hasilSemen">0 Sak</div>
+            </div>
 
-    <div id="hasil"></div>
+            <!-- Kebutuhan Pasir -->
+            <div class="kpi-card">
+                <div class="kpi-label">Kebutuhan Pasir Beton</div>
+                <div class="kpi-value" id="hasilPasir">0.00 m³</div>
+            </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+            <!-- Kebutuhan Kerikil -->
+            <div class="kpi-card">
+                <div class="kpi-label">Kebutuhan Kerikil / Split</div>
+                <div class="kpi-value" id="hasilKerikil">0.00 m³</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Fungsi interaktif mengganti nama label kolom berdasarkan pilihan bentuk
+    function sesuaikanFormulir() {
+        const bentuk = document.getElementById("bentukBeton").value;
+        const labelLebar = document.getElementById("labelLebar");
+        const inputLebar = document.getElementById("lebar");
+
+        if (bentuk === "silinder") {
+            labelLebar.innerText = "Diameter (meter)";
+            inputLebar.placeholder = "Masukkan diameter tiang silinder";
+        } else {
+            labelLebar.innerText = "Lebar (meter)";
+            inputLebar.placeholder = "Masukkan lebar bangunan";
+        }
+    }
+
+    // Fungsi reset data instan sekali klik
+    function resetForm() {
+        document.getElementById("panjang").value = "";
+        document.getElementById("lebar").value = "";
+        document.getElementById("tinggi").value = "";
+        document.getElementById("hasilVolume").textContent = "0.000 m³";
+        document.getElementById("hasilSemen").textContent = "0 Sak";
+        document.getElementById("hasilPasir").textContent = "0.00 m³";
+        document.getElementById("hasilKerikil").textContent = "0.00 m³";
+    }
+
+    // Fungsi Utama Perhitungan Rumus Matematika & Material SNI
+    function hitungvolume() {
+        const panjang = parseFloat(document.getElementById("panjang").value) || 0;
+        const lebar = parseFloat(document.getElementById("lebar").value) || 0;
+        const tinggi = parseFloat(document.getElementById("tinggi").value) || 0;
+        const bentuk = document.getElementById("bentukBeton").value;
+        const tipeSemen = parseFloat(document.getElementById("kemasanSemen").value);
+
+        let volume = 0;
+
+        // 1. Kalkulasi Kubikasi Dasar
+        if (bentuk === "balok" || bentuk === "plat") {
+            volume = panjang * lebar * tinggi;
+        } else if (bentuk === "silinder") {
+            const radius = lebar / 2;
+            volume = Math.PI * radius * radius * tinggi;
+        }
+
+        // Tampilkan Volume Beton Kasar
+        document.getElementById("hasilVolume").textContent = volume.toFixed(3) + " m³";
