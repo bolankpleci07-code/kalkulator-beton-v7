@@ -219,25 +219,21 @@
         <div class="result-column">
             <h3>Rincian Kebutuhan Material (SNI)</h3>
             
-            <!-- Hasil Volume Utama -->
             <div class="kpi-card main-volume">
                 <div class="kpi-label">Total Volume Beton</div>
                 <div class="kpi-value" id="hasilVolume">0.000 m³</div>
             </div>
 
-            <!-- Kebutuhan Semen -->
             <div class="kpi-card">
                 <div class="kpi-label">Kebutuhan Semen Belanja</div>
                 <div class="kpi-value" id="hasilSemen">0 Sak</div>
             </div>
 
-            <!-- Kebutuhan Pasir -->
             <div class="kpi-card">
                 <div class="kpi-label">Kebutuhan Pasir Beton</div>
                 <div class="kpi-value" id="hasilPasir">0.00 m³</div>
             </div>
 
-            <!-- Kebutuhan Kerikil -->
             <div class="kpi-card">
                 <div class="kpi-label">Kebutuhan Kerikil / Split</div>
                 <div class="kpi-value" id="hasilKerikil">0.00 m³</div>
@@ -246,50 +242,8 @@
     </div>
 </div>
 
-<script>
-    // Fungsi interaktif mengganti nama label kolom berdasarkan pilihan bentuk
-    function sesuaikanFormulir() {
-        const bentuk = document.getElementById("bentukBeton").value;
-        const labelLebar = document.getElementById("labelLebar");
-        const inputLebar = document.getElementById("lebar");
+<!-- Menghubungkan file HTML ke logika JavaScript eksternal Anda -->
+<script src="script.js"></script>
 
-        if (bentuk === "silinder") {
-            labelLebar.innerText = "Diameter (meter)";
-            inputLebar.placeholder = "Masukkan diameter tiang silinder";
-        } else {
-            labelLebar.innerText = "Lebar (meter)";
-            inputLebar.placeholder = "Masukkan lebar bangunan";
-        }
-    }
-
-    // Fungsi reset data instan sekali klik
-    function resetForm() {
-        document.getElementById("panjang").value = "";
-        document.getElementById("lebar").value = "";
-        document.getElementById("tinggi").value = "";
-        document.getElementById("hasilVolume").textContent = "0.000 m³";
-        document.getElementById("hasilSemen").textContent = "0 Sak";
-        document.getElementById("hasilPasir").textContent = "0.00 m³";
-        document.getElementById("hasilKerikil").textContent = "0.00 m³";
-    }
-
-    // Fungsi Utama Perhitungan Rumus Matematika & Material SNI
-    function hitungvolume() {
-        const panjang = parseFloat(document.getElementById("panjang").value) || 0;
-        const lebar = parseFloat(document.getElementById("lebar").value) || 0;
-        const tinggi = parseFloat(document.getElementById("tinggi").value) || 0;
-        const bentuk = document.getElementById("bentukBeton").value;
-        const tipeSemen = parseFloat(document.getElementById("kemasanSemen").value);
-
-        let volume = 0;
-
-        // 1. Kalkulasi Kubikasi Dasar
-        if (bentuk === "balok" || bentuk === "plat") {
-            volume = panjang * lebar * tinggi;
-        } else if (bentuk === "silinder") {
-            const radius = lebar / 2;
-            volume = Math.PI * radius * radius * tinggi;
-        }
-
-        // Tampilkan Volume Beton Kasar
-        document.getElementById("hasilVolume").textContent = volume.toFixed(3) + " m³";
+</body>
+</html>
